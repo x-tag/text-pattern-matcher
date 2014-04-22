@@ -1,0 +1,24 @@
+{
+  "name": "text-pattern-matcher",
+  "tagName": "x-text-pattern-matcher",
+  "version": "0.0.0",
+  "author": "Arron Schaar",
+  "description": "Used to watch text inputs for regular expression matches, then fires a custom method that allows the user to return a list of results.",
+  "demo": "demo/index.html",
+  "compatibility": {
+    "firefox": 5,
+    "chrome": 4,
+    "ie": 9,
+    "opera": 12,
+    "android": 2.1,
+    "ios": 4
+  },
+  "documentation": {
+    "description": "Used to watch text inputs for regular expression matches, then fires a custom method that allows the user to return a list of results.",
+    "attributes": {},
+    "events": {},
+    "methods": {},
+    "getters": {},
+    "setters": {}
+  }
+}
