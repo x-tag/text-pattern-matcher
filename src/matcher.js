@@ -104,6 +104,10 @@
   methods: {
     _change: function(e){
     var elem = this;
+    if(e.keyCode === 9 && !elem.xtag.list.hasAttribute('hidden')){
+      elem.xtag.list.focus();
+      return;
+    }
     xtag.query(this, 'x-pattern-matcher').forEach(function(match){
       // Find current word by looking at cursor position
       // and then iterating through words
