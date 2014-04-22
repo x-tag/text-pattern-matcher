@@ -26,11 +26,12 @@
 </head>
 <body id="app">
 
-Test Box
-<input type="text" name="test">
-<input type="text" name="test">
+<p>Enter text that begins with # or @</p>
+<input type="text" class="tagFields">
+<p>A single tag can watch multiple inputs</p>
+<input type="text" class="tagFields">
 
-<x-text-pattern-matcher target="input[name='test']">
+<x-text-pattern-matcher target="input.tagFields">
   <x-pattern-matcher split="(#\w+)" select="#(\w+)" onmatch="matchColors"></x-pattern-matcher>
   <x-pattern-matcher split="(@\w+)" select="@(\w+)" onmatch="matchUsers"></x-pattern-matcher>
   <x-pattern-matcher split="(@)" select="@" onmatch="topUsers"></x-pattern-matcher>
