@@ -1,7 +1,7 @@
 {
   "name": "text-pattern-matcher",
   "tagName": "x-text-pattern-matcher",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "author": "Arron Schaar",
   "description": "Used to watch text inputs for regular expression matches, then fires a custom method that allows the user to return a list of results.",
   "demo": "demo/index.html",
