@@ -42,6 +42,7 @@
     this.xtag.matches = this.querySelectorAll('x-pattern-matcher');
     this.xtag.list = document.createElement('ul');
     this.xtag.list.setAttribute('tabindex','0');
+    document.body.appendChild(this.xtag.list);
     xtag.addClass(this.xtag.list,'autocompleter-list');
     xtag.addEvent(this.xtag.list,
       'keydown:keypass(13,38,40,27,32)', function(e){
@@ -147,9 +148,6 @@
     var pos = getElementPosition(lastMatchInput);
     this.xtag.list.style.top = (pos.top + convertEm(1, lastMatchInput)) + 'px';
     this.xtag.list.style.left = pos.left + 'px';
-    lastMatchInput.parentElement.insertBefore(this.xtag.list,
-      lastMatchInput.nextSibling);
-    }
   }
   });
 
