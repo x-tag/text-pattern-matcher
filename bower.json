@@ -1,16 +1,16 @@
 {
   "name": "text-pattern-matcher",
   "description": "Used to watch text inputs for regular expression matches, then fires a custom method that allows the user to return a list of results.",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "author": "Arron Schaar",
   "keywords": [
-  	"Element",
+    "Element",
     "web-components",
     "x-tag"
   ],
   "main": [
-    "src/matcher.js"
-    ,"src/matcher.css"
+    "src/matcher.js",
+    "src/matcher.css"
   ],
   "dependencies": {
     "x-tag-core": "*"
