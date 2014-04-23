@@ -1,27 +1,33 @@
 # About Text Pattern Matcher
-
+These elements allow you to watch multiple input fields for multiple patterns and then return a custom list of suggestions for each match.
 
 # Example
 
 ```
 // describe usage
 
+<p>Enter text that begins with # or @</p>
+<input type="text" class="tagFields">
+<p>A single tag can watch multiple inputs</p>
+<input type="text" class="tagFields">
 
-```
+<x-text-pattern-matcher target="input.tagFields">
+  <x-pattern-matcher split="(#\w+)" select="#(\w+)" onmatch="matchColors"></x-pattern-matcher>
+  <x-pattern-matcher split="(@\w+)" select="@(\w+)" onmatch="matchUsers"></x-pattern-matcher>
+  <x-pattern-matcher split="(@)" select="@" onmatch="topUsers"></x-pattern-matcher>
+</x-text-pattern-matcher>
 
-# Download it
+function matchColors(match, callback){
+	callback([]);
+}
 
+function matchUsers(match, callback){
+	callback([]);
+}
 
-
-# Dev Setup
-
-```
-Fork this repo, rename it, then clone it.
-
-$ npm install	// install bower tasks
-$ bower install	// install components
-$ grunt build   // build
-$ grunt bump-push  // bump the version number, tag it and push to origin master
+function topUsers(match, callback){
+	callback([]);
+}
 
 ```
 

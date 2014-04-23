@@ -1,37 +1,37 @@
 (function(){
 
-  xtag.register('x-pattern-matcher', {
+xtag.register('x-pattern-matcher', {
   lifecycle:{
     created: function(){
-    this.xtag.split = new RegExp();
-    this.xtag.select = null;
+      this.xtag.split = new RegExp();
+      this.xtag.select = null;
     }
   },
   accessors: {
     split: {
-    attribute: {},
-    set: function(value){
-      this.xtag.split = new RegExp(value);
-    },
-    get: function(){
-      return this.xtag.split;
-    }
+      attribute: {},
+      set: function(value){
+        this.xtag.split = new RegExp(value);
+      },
+      get: function(){
+        return this.xtag.split;
+      }
     },
     select: {
-    attribute: {},
-    set: function(value){
-      if (value && value.length>0){ this.xtag.select = new RegExp(value);}
-      else { this.xtag.select = null; }
-    },
-    get: function(){
-      return this.xtag.select;
-    }
+      attribute: {},
+      set: function(value){
+        if (value && value.length>0){ this.xtag.select = new RegExp(value);}
+        else { this.xtag.select = null; }
+      },
+      get: function(){
+        return this.xtag.select;
+      }
     },
     onmatch: {
-    attribute: {}
+      attribute: {}
     }
   }
-  });
+});
 
 xtag.register('x-text-pattern-matcher', {
   lifecycle: {
@@ -46,32 +46,32 @@ xtag.register('x-text-pattern-matcher', {
       xtag.addClass(this.xtag.list,'autocompleter-list');
       xtag.addEvent(this.xtag.list,
         'keydown:keypass(13,38,40,27,32)', function(e){
-        var selected;
-        switch(e.keyCode){
-          case 13: // enter
-          selected = xtag.query(ac.xtag.list, 'li[selected]')[0];
-          updateSelected.call(ac, selected.textContent);
-          ac.xtag.list.setAttribute('hidden','');
-          break;
-          case 38: // up
-          selected = xtag.query(ac.xtag.list, 'li[selected]')[0];
-          if (selected){ selected.removeAttribute('selected');}
-          (selected ? selected.previousSibling || ac.xtag.list.lastElementChild : ac.xtag.list.lastElementChild).setAttribute('selected','');
-          break;
-          case 40: // down
-          selected = xtag.query(ac.xtag.list, 'li[selected]')[0];
-          if (selected){ selected.removeAttribute('selected');}
-          (selected ? selected.nextSibling || ac.xtag.list.firstElementChild : ac.xtag.list.firstElementChild).setAttribute('selected','');
-          break;
-          case 27: // escape
-          ac.xtag.list.setAttribute('hidden','');
-          break;
-          case 32: // spacebar
-          selected = xtag.query(ac.xtag.list, 'li[selected]')[0];
-          if (selected){ selected.removeAttribute('selected');}
-          this.setAttribute('selected','');
-          break;
-        }
+          var selected;
+          switch(e.keyCode){
+            case 13: // enter
+              selected = xtag.query(ac.xtag.list, 'li[selected]')[0];
+              updateSelected.call(ac, selected.textContent);
+              ac.xtag.list.setAttribute('hidden','');
+              break;
+            case 38: // up
+              selected = xtag.query(ac.xtag.list, 'li[selected]')[0];
+              if (selected){ selected.removeAttribute('selected');}
+              (selected ? selected.previousSibling || ac.xtag.list.lastElementChild : ac.xtag.list.lastElementChild).setAttribute('selected','');
+              break;
+            case 40: // down
+              selected = xtag.query(ac.xtag.list, 'li[selected]')[0];
+              if (selected){ selected.removeAttribute('selected');}
+              (selected ? selected.nextSibling || ac.xtag.list.firstElementChild : ac.xtag.list.firstElementChild).setAttribute('selected','');
+              break;
+            case 27: // escape
+              ac.xtag.list.setAttribute('hidden','');
+              break;
+            case 32: // spacebar
+              selected = xtag.query(ac.xtag.list, 'li[selected]')[0];
+              if (selected){ selected.removeAttribute('selected');}
+              this.setAttribute('selected','');
+              break;
+          }
         }
       );
       xtag.addEvent(this.xtag.list, 'tap:delegate(li)', function(e){
@@ -84,22 +84,22 @@ xtag.register('x-text-pattern-matcher', {
   },
   accessors: {
     target:{
-    attribute: {},
-    set: function(selector){
-      var pseudo = 'keypress:keyfail(9, 13):delegate(';
-      if (this.xtag._selector !== selector && this.xtag._delegate) {
-        xtag.removeEvent(document,
-          pseudo + this.xtag._selector + ')',
-          this.xtag._delegate);
-        this.xtag._delegate = null;
+      attribute: {},
+      set: function(selector){
+        var pseudo = 'keypress:keyfail(13):delegate(';
+        if (this.xtag._selector !== selector && this.xtag._delegate) {
+          xtag.removeEvent(document,
+            pseudo + this.xtag._selector + ')',
+            this.xtag._delegate);
+          this.xtag._delegate = null;
+        }
+        if (!this.xtag._delegate) {
+          this.xtag._delegate = xtag.addEvent(document,
+            pseudo + selector + ')',
+            debounce(this._change.bind(this), 400));
+          this.xtag._selector = selector;
+        }
       }
-      if (!this.xtag._delegate) {
-        this.xtag._delegate = xtag.addEvent(document,
-          pseudo + selector + ')',
-          debounce(this._change.bind(this), 400));
-        this.xtag._selector = selector;
-      }
-    }
     }
   },
   methods: {
@@ -152,64 +152,64 @@ xtag.register('x-text-pattern-matcher', {
   }
 });
 
-  function updateSelected(newText){
-    var obj = this.xtag,
-      curPos = obj.lastCursorPosition,
-      wordStart = 0,
-      wordEnd = 0;
+function updateSelected(newText){
+  var obj = this.xtag,
+    curPos = obj.lastCursorPosition,
+    wordStart = 0,
+    wordEnd = 0;
 
-    obj.lastMatchInput.value = obj
-      .lastMatchInput.value
-      .split(obj.lastMatchElement.split).map(function(tag){
-      wordEnd += tag.length;
-      if (curPos >= wordStart && curPos <= wordEnd && tag.length>0){
-        wordStart += tag.length;
-        if (obj.lastMatch[1] && obj.lastMatch[1].length>0){
-          tag = tag.replace(obj.lastMatch[1], newText);
-        } else {
-          tag = obj.lastMatch[0] + newText;
-        }
+  obj.lastMatchInput.value = obj
+    .lastMatchInput.value
+    .split(obj.lastMatchElement.split).map(function(tag){
+    wordEnd += tag.length;
+    if (curPos >= wordStart && curPos <= wordEnd && tag.length>0){
+      wordStart += tag.length;
+      if (obj.lastMatch[1] && obj.lastMatch[1].length>0){
+        tag = tag.replace(obj.lastMatch[1], newText);
+      } else {
+        tag = obj.lastMatch[0] + newText;
       }
-      return tag;
-      }).join('');
-    obj.lastMatchInput.focus();
-  }
-
-  function getCaretPosition (oField) {
-    var iCaretPos = 0;
-    // IE Support
-    if (document.selection) {
-      // Set focus on the element
-      oField.focus ();
-      // To get cursor position, get empty selection range
-      var oSel = document.selection.createRange ();
-      // Move selection start to 0 position
-      oSel.moveStart ('character', -oField.value.length);
-      // The caret position is selection length
-      iCaretPos = oSel.text.length;
-    } else if (oField.selectionStart || oField.selectionStart === '0'){
-      iCaretPos = oField.selectionStart;
     }
-    // Return results
-    return (iCaretPos);
-  }
+    return tag;
+    }).join('');
+  obj.lastMatchInput.focus();
+}
 
-  function getElementFontSize( context ) {
-    // Returns a number
-    return parseFloat(
-      getComputedStyle( context || document.documentElement).fontSize
-    );
+function getCaretPosition (oField) {
+  var iCaretPos = 0;
+  // IE Support
+  if (document.selection) {
+    // Set focus on the element
+    oField.focus ();
+    // To get cursor position, get empty selection range
+    var oSel = document.selection.createRange ();
+    // Move selection start to 0 position
+    oSel.moveStart ('character', -oField.value.length);
+    // The caret position is selection length
+    iCaretPos = oSel.text.length;
+  } else if (oField.selectionStart || oField.selectionStart === '0'){
+    iCaretPos = oField.selectionStart;
   }
+  // Return results
+  return (iCaretPos);
+}
 
-  function convertRem(value) {
-    return convertEm(value);
-  }
+function getElementFontSize( context ) {
+  // Returns a number
+  return parseFloat(
+    getComputedStyle( context || document.documentElement).fontSize
+  );
+}
 
-  function convertEm(value, context) {
-    return value * getElementFontSize(context);
-  }
+function convertRem(value) {
+  return convertEm(value);
+}
 
-  function getElementPosition(elem){
+function convertEm(value, context) {
+  return value * getElementFontSize(context);
+}
+
+function getElementPosition(elem){
   var box = { left: 0, top: 0 };
   try {
     box = elem.getBoundingClientRect();
@@ -225,10 +225,10 @@ xtag.register('x-text-pattern-matcher', {
     scrollLeft = win.pageXOffset || body.scrollLeft,
     top  = box.top  + scrollTop  - clientTop,
     left = box.left + scrollLeft - clientLeft;
-    return { top:top, left:left};
-  }
+  return { top:top, left:left};
+}
 
-  var debounce = function (func, threshold, execAsap) {
+var debounce = function (func, threshold, execAsap) {
   var timeout;
   return function debounced () {
     var obj = this, args = arguments;
@@ -244,7 +244,7 @@ xtag.register('x-text-pattern-matcher', {
     }
     timeout = setTimeout(delayed, threshold || 200);
   };
-  };
+};
 
 
 
