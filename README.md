@@ -1,6 +1,10 @@
 # About Text Pattern Matcher
 These elements allow you to watch multiple input fields for multiple patterns and then return a custom list of suggestions for each match.
 
+# Use
+```
+bower install x-tag-text-pattern-matcher
+```
 # Example
 
 ```
